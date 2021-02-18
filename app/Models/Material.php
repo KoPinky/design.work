@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Material extends Model
 {
     use HasFactory;
+    protected $table = 'materials';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name_service',
+        'price',
+        'description'
+    ];
+
+
 }

@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceStage extends Model
+class ObjectB extends Model
 {
     use HasFactory;
-    protected $table = 'service_stages_list';
+    protected $table = 'objects';
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
-        'service_id',
-        'stage_id',
-        'status'
+        'address',
     ];
+
 }
