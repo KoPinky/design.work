@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use App\Models\ServiceOrder;
 use App\Models\Stage;
 use App\Models\StageList;
@@ -33,6 +34,7 @@ class StageController extends Controller
         $request->validate([
             'name_service' => 'required',
             'description' => 'required',
+
         ]);
 
         Stage::create();
@@ -40,16 +42,16 @@ class StageController extends Controller
     }
 
     /**
-     * @param $order_id
+     * @param int $id
      * @return Application|ResponseFactory|Response
      */
-    public function show($order_id)
+    public function show(int $id)
     {
-        $serviceOrder = ServiceOrder::query()
-            ->where('order_id', '=', $order_id)
-            ->get();
-        return response($serviceOrder->stage());
-
+        return response(Service::find($id)->stage()->get())
+            ->withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ]);
     }
 
     /**

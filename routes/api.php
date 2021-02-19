@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\StageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => '/posts', 'middleware' => 'auth:api'], function() {
-    Route::get('', [PostController::class, 'show']);// просмотр своих постов авторизованным пользователем
-    Route::get('{id}', [PostController::class, 'show']);// просмотр чужих постов авторизованным пользователем
-    Route::post('', [PostController::class, 'store']);// создание поста авторизованным пользователем
-    Route::delete('{id}', [PostController::class, 'destroy']);// удаление поста авторизованным пользователем
-});
+
+Route::get('service', [ServiceController::class, 'show']);
+Route::post('service', [ServiceController::class, 'store']);
+Route::post('service/{service}', [ServiceController::class, 'update']);
+Route::delete('service/{id}', [ServiceController::class, 'destroy']);
+
+Route::get('stage/{id}', [StageController::class, 'show']);
+Route::post('stage', [StageController::class, 'store']);
+Route::post('stage/{service}', [StageController::class, 'update']);
+Route::delete('stage/{id}', [StageController::class, 'destroy']);

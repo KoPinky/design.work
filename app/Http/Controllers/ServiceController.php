@@ -8,6 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Throwable;
 
 class ServiceController extends Controller
 {
@@ -19,13 +20,21 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name_service' => 'required',
-            'price' => 'required',
-            'description' => 'required'
-        ]);
-        Service::create($request->all());
-        return response('OK', 201);
+        try {
+            $request->validate([
+                'name_service' => 'required',
+                'price' => 'required|between:0,99.99',
+                'description' => 'required'
+            ]);
+            Service::create($request->all());
+            return response('OK', 201);
+        } catch (Throwable $e) {
+            return response($e->getMessage(), 400)->withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ]);
+        }
+
     }
 
     /**
@@ -47,22 +56,27 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $service->update($request->all());
-
-        return response('OK', 202);
+        return response($service, 202);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param Service $service
+     * @param int $id
      * @return Application|ResponseFactory|Response
-     * @throws Exception
      */
-    public function destroy(Service $service)
+    public function destroy(int $id)
     {
-        $service->delete();
 
-        return response('OK');
+        try {
+            Service::findOrFail($id)->delete();
+            return response('OK', 204);
+        }
+        catch (Throwable $e){
+            return response($e->getMessage(), 404)
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ]);
+        }
     }
 
     /**

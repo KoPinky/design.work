@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
 {
@@ -25,8 +26,11 @@ class Service extends Model
         return $this->belongsToMany(Order::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function stage()
     {
-        return $this->belongsToMany(Stage::class);
+        return $this->hasMany(Stage::class, 'service_id', 'id');
     }
 }
