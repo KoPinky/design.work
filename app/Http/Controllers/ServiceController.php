@@ -31,10 +31,9 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return Application|ResponseFactory|Response
      */
-    public function show(int $id)
+    public function show()
     {
         return response(Service::all());
     }
@@ -64,5 +63,14 @@ class ServiceController extends Controller
         $service->delete();
 
         return response('OK');
+    }
+
+    /**
+     * @param int $id
+     * @return Application|ResponseFactory|Response
+     */
+    public function getStages(int $id)
+    {
+        return response(Service::find($id)->stages());
     }
 }

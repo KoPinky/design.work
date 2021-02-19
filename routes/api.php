@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => '/posts', 'middleware' => 'auth:api'], function() {
+    Route::get('', [PostController::class, 'show']);// просмотр своих постов авторизованным пользователем
+    Route::get('{id}', [PostController::class, 'show']);// просмотр чужих постов авторизованным пользователем
+    Route::post('', [PostController::class, 'store']);// создание поста авторизованным пользователем
+    Route::delete('{id}', [PostController::class, 'destroy']);// удаление поста авторизованным пользователем
+});

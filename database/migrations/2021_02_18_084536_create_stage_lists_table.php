@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStagesTable extends Migration
+class CreateStageListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateStagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('stages', function (Blueprint $table) {
+        Schema::create('stage_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('name_service');
-            $table->string('description');
-            $table->bigInteger('service_id')->references('id')->on('services');
+            $table->bigInteger('service_order_id')->references('id')->on('services_order');
+            $table->bigInteger('stage_id')->references('id')->on('stages');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateStagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stages');
+        Schema::dropIfExists('stage_lists');
     }
 }

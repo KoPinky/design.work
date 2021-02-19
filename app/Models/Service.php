@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
+
     protected $table = 'services';
 
     /**
@@ -18,4 +19,14 @@ class Service extends Model
         'price',
         'description'
     ];
+
+    public function order()
+    {
+        return $this->belongsToMany(Order::class);
+    }
+
+    public function stage()
+    {
+        return $this->belongsToMany(Stage::class);
+    }
 }
