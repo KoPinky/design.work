@@ -47,6 +47,8 @@ class StageController extends Controller
      */
     public function show(int $id)
     {
+
+
         return response(Service::find($id)->stage()->get())
             ->withHeaders([
                 'Content-Type' => 'application/json',

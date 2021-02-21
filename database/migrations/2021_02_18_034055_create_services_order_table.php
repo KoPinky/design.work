@@ -17,6 +17,7 @@ class CreateServicesOrderTable extends Migration
             $table->id();
             $table->bigInteger('service_id')->references('id')->on('services');
             $table->bigInteger('order_id')->references('id')->on('orders');
+            $table->string('status_id')->references('id')->on('statuses');
             $table->timestamps();
         });
     }

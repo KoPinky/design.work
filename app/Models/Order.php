@@ -26,4 +26,9 @@ class Order extends Model
     {
         return $this->belongsToMany(Service::class);
     }
+
+    public function stageList()
+    {
+        return $this->hasManyThrough(StageList::class, ServiceOrder::class);
+    }
 }

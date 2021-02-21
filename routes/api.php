@@ -30,3 +30,5 @@ Route::get('stage/{id}', [StageController::class, 'show']);
 Route::post('stage', [StageController::class, 'store']);
 Route::post('stage/{service}', [StageController::class, 'update']);
 Route::delete('stage/{id}', [StageController::class, 'destroy']);
+
+

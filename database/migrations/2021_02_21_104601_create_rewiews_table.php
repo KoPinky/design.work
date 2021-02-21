@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiceStagesListTable extends Migration
+class CreateRewiewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateServiceStagesListTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_stages_list', function (Blueprint $table) {
+        Schema::create('rewiews', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('service_id')->references('id')->on('services');
-            $table->bigInteger('stage_id')->references('id')->on('stages');
-            $table->string('status');
+            $table->bigIncrements('user_id')->references('id')->on('services_order');
+            $table->string('string');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateServiceStagesListTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_stages_list');
+        Schema::dropIfExists('rewiews');
     }
 }

@@ -17,7 +17,7 @@ class CreateStageListsTable extends Migration
             $table->id();
             $table->bigInteger('service_order_id')->references('id')->on('services_order');
             $table->bigInteger('stage_id')->references('id')->on('stages');
-            $table->string('status');
+            $table->string('status')->references('id')->on('statuses');;
             $table->timestamps();
         });
     }
