@@ -16,7 +16,7 @@ class CreateRewiewsTable extends Migration
         Schema::create('rewiews', function (Blueprint $table) {
             $table->id();
             $table->bigIncrements('user_id')->references('id')->on('services_order');
-            $table->string('string');
+            $table->string('text');
             $table->timestamps();
         });
     }

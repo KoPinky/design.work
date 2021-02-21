@@ -6,10 +6,11 @@ use App\Models\Service;
 use App\Models\ServiceOrder;
 use App\Models\Stage;
 use App\Models\StageList;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
+
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
 
 class StageController extends Controller
 {
@@ -20,7 +21,7 @@ class StageController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -38,18 +39,18 @@ class StageController extends Controller
         ]);
 
         Stage::create();
-        return response(json_encode('OK'), 201);
+        return response->json('OK', 201);
     }
 
     /**
      * @param int $id
-     * @return Application|ResponseFactory|Response
+     * @return JsonResponse
      */
     public function show(int $id)
     {
 
 
-        return response(Service::find($id)->stage()->get())
+        return response()->json(Service::find($id)->stage()->get())
             ->withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',

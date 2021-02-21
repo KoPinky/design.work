@@ -24,7 +24,9 @@ class ReauestStage extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name_service' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'service_id' => ['required', 'integer']
         ];
     }
 }

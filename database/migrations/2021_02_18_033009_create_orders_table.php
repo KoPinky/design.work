@@ -15,9 +15,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->date('date_contract');
-            $table->date('date_start');
-            $table->date('date_end');
+            $table->date('dateContract');
+            $table->date('dateStart');
+            $table->date('dateEnd');
             $table->boolean('status');
             $table->bigInteger('object_id')->references('id')->on('objects');
             $table->timestamps();

@@ -15,7 +15,7 @@ class CreateStagesTable extends Migration
     {
         Schema::create('stages', function (Blueprint $table) {
             $table->id();
-            $table->string('name_service');
+            $table->string('serviceName');
             $table->string('description');
             $table->bigInteger('service_id')->references('id')->on('services');
             $table->timestamps();
